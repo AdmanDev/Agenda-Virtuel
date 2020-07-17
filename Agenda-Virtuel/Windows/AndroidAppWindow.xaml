@@ -1,0 +1,19 @@
+﻿<Window x:Class="Agenda_Virtuel.AndroidAppWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        Title="Agenda-Virtuel - Android" Style="{DynamicResource WindowsStyle}" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" Height="811" Width="772">
+    <StackPanel>
+        <local:WindowHeader/>
+        <Image Source="pack://application:,,,/Resources/Images/AgendaAndroid/AgendaAndroid.png" Width="400"/>
+        <Border BorderBrush="Black" BorderThickness="5" Margin="0, 5">
+            <TextBlock FontSize="20" TextWrapping="Wrap" TextAlignment="Center" Text="Retrouvez l'Agenda - Virtuel sur votre Android et synchronisez vos donnés afin d'y accèder à tout moment !"/>
+        </Border>
+        <Image Source="pack://application:,,,/Resources/Images/AgendaAndroid/AgendaVirtuel_Android_QRCode.png" Width="400"/>
+
+        <CheckBox x:Name="CB_DontDisplay" Content="Ne plus afficher" Foreground="White" FontSize="18" HorizontalAlignment="Center" Margin="30" Click="CB_DontDisplay_Checked"/>
+    </StackPanel>
+</Window>

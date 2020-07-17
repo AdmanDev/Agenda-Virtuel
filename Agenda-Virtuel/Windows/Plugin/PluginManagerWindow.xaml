@@ -1,0 +1,28 @@
+﻿<Window x:Class="Agenda_Virtuel.PluginManagerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Plugins" Width="500" MinHeight="150" Style="{DynamicResource WindowsStyle}" SizeToContent="Height" WindowStartupLocation="CenterScreen" Loaded="OnLoad">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <local:WindowHeader/>
+
+            <StackPanel Orientation="Horizontal" Margin="8">
+                <Button x:Name="BT_NewPlugin" Content="Ajouter" Style="{DynamicResource PrimaryButtonStyle}" Click="BT_NewPlugin_Click"/>
+                <Button x:Name="BT_PluginStore" Content="Plugins Store" Style="{DynamicResource PrimaryButtonStyle}" Margin="5,0,0,0" Click="BT_PluginStore_Click"/>
+            </StackPanel>
+
+            <StackPanel x:Name="SP_Plugins" Orientation="Vertical"/>
+        </StackPanel>
+
+        <Border x:Name="Panel_AddPlugin" Visibility="Collapsed" BorderBrush="White" BorderThickness="2" Background="{DynamicResource WinBackgroundColor}" Margin="10,79,0,19" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="BT_Install" Content="Installer un plugin" Style="{DynamicResource SecondaryButtonStyle}" Margin="5" Click="BT_Install_Click"/>
+                <Button x:Name="BT_CreateInstaller" Content="Créer un installateur" Style="{DynamicResource SecondaryButtonStyle}" Margin="5" Click="BT_CreateInstaller_Click"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

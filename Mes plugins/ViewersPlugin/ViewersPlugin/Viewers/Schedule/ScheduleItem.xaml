@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="ViewersPlugin.Viewers.Schedule.ScheduleItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ViewersPlugin.Viewers.Schedule"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="200" Margin="5, 0, 5, 5" BorderBrush="White" BorderThickness="2" MouseRightButtonUp="UserControl_MouseRightButtonUp">
+    <UserControl.Resources>
+
+        <Style x:Key="MenuStyle" TargetType="ContextMenu">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Name="Border" Margin="5" MinWidth="100" BorderThickness="1" BorderBrush="White">
+                            <Grid>
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                        <LinearGradientBrush.RelativeTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                                <SkewTransform CenterY="0.5" CenterX="0.5" AngleX="5" AngleY="5"/>
+                                                <RotateTransform Angle="56.31" CenterY="0.5" CenterX="0.5"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </LinearGradientBrush.RelativeTransform>
+                                        <GradientStop Color="#FF0E0E0E" Offset="1"/>
+                                        <GradientStop Color="Black"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="BorderBrush" Value="#FF4F4F4F"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+
+        <ContextMenu x:Key="Menu" Style="{StaticResource MenuStyle}" ItemContainerStyle="{StaticResource MenuItemStyle}">
+            <MenuItem x:Name="BT_Delete" Header="Supprimer" Click="BT_Delete_Click"/>
+            <MenuItem x:Name="BT_Edit" Header="Editer" Click="BT_Edit_Click"/>
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Black" Opacity="0.12"/>
+        </Grid.Background>
+        <StackPanel Orientation="Vertical">
+            <Border BorderBrush="White" BorderThickness="1">
+                <Border.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.15"/>
+                </Border.Background>
+                <TextBlock x:Name="LB_Subject" Text="Subject" Foreground="White" FontSize="18" TextAlignment="Center" TextWrapping="Wrap"/>
+            </Border>
+            <TextBlock x:Name="LB_Job" Text="Job" Foreground="White" FontSize="16" TextWrapping="Wrap" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

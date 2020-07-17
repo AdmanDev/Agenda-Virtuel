@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Cahier_de_texte_en_ligne.Settings_Control"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cahier_de_texte_en_ligne"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="ID" Foreground="White" FontSize="20">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="https://edu-cdt.ac-versailles.fr/" FontSize="14" Foreground="White" HorizontalContentAlignment="Center"/>
+                    <Label Content="0361751F" FontSize="14" Foreground="Red" HorizontalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBox Text="https://edu-cdt.ac-versailles.fr/" Padding="3" FontSize="14" IsReadOnly="True"/>
+                    <TextBox x:Name="TB_ID" Padding="3" FontSize="14" MinWidth="100" Margin="5,0" TextChanged="TB_ID_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <Style.Resources>
+                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
+                                        <VisualBrush.Visual>
+                                            <Label Content="0361751F (ID)" Foreground="LightGray" FontSize="14"  HorizontalContentAlignment="Center"/>
+                                        </VisualBrush.Visual>
+                                    </VisualBrush>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="Text" Value="{x:Null}">
+                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsKeyboardFocused" Value="True">
+                                        <Setter Property="Background" Value="White" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button x:Name="BT_Paste" Background="{x:Null}" Click="BT_Paste_Click">
+                        <Image x:Name="IMG_Paste" Source="pack://application:,,,/Resources/PasteIcon.png" MaxHeight="22"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Informations sur votre classe" Foreground="White" FontSize="20" Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <ComboBox Name="CB_Classes" FontSize="14" MinWidth="200"/>
+                <TextBox x:Name="TB_MDP" Padding="3" FontSize="14" MinWidth="100" Margin="5,0" >
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                            <Style.Resources>
+                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Center" AlignmentY="Center" Stretch="None">
+                                    <VisualBrush.Visual>
+                                        <Label Content="Mot de passe" Foreground="LightGray" FontSize="14"  HorizontalContentAlignment="Center"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Style.Resources>
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="Text" Value="{x:Null}">
+                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Background" Value="White" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </StackPanel>
+        </GroupBox>
+        <Button x:Name="BT_Save" Content="Enregistrer" FontSize="22" Margin="20" Click="TB_Save_Click"/>
+    </StackPanel>
+</UserControl>

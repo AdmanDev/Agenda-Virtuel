@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Agenda_Virtuel.HomeworksViewerContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Agenda_Virtuel"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="1158">
+    <Grid>
+        <Button x:Name="BT_CenterAddHomework" Content="Ajouter un devoir" VerticalAlignment="Center" Margin="200" Style="{DynamicResource PrimaryButtonStyle}" Click="BT_AddHomework_Click"/>
+
+        <StackPanel Orientation="Vertical">
+            <Grid x:Name="Grid_Header" TextBlock.FontWeight="Bold" Background="{DynamicResource WinBackgroundColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="21*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.ColumnSpan="3">
+                    <Grid.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.25"/>
+                    </Grid.Background>
+                </Grid>
+
+                <Border Grid.Column="0" BorderBrush="White" BorderThickness="1">
+                    <TextBlock Text="Matière" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <Border Grid.Column="1" BorderBrush="White" BorderThickness="1">
+                    <TextBlock Text="Travail" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+                <Border Grid.Column="2" BorderBrush="White" BorderThickness="1" Padding="3"/>
+
+                <Border Grid.Column="3" BorderBrush="White" BorderThickness="1" Padding="3">
+                    <TextBlock Text="Action" TextAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+
+            </Grid>
+
+            <ScrollViewer x:Name="ScrollViewer" VerticalScrollBarVisibility="Auto" MaxHeight="595" >
+                <StackPanel x:Name="SP_Homeworks" Orientation="Vertical"/>
+            </ScrollViewer>
+
+        </StackPanel>
+    </Grid>
+</UserControl>

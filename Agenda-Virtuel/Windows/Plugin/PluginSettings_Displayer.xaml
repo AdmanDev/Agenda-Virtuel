@@ -1,0 +1,15 @@
+﻿<Window x:Class="Agenda_Virtuel.Plugin.PluginSettings_Displayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel.Plugin"
+        xmlns:ag="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Plugin - Paramètres" MinWidth="420" MaxWidth="900" MaxHeight="900" Style="{DynamicResource WindowsStyle}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <StackPanel Orientation="Vertical">
+        <ag:WindowHeader/>
+
+        <GroupBox x:Name="Group" Header="Plugin - Paramètres"/>
+    </StackPanel>
+</Window>

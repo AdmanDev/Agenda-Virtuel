@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Agenda_Virtuel.Controls.Plugin.PluginItemView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Agenda_Virtuel"
+             mc:Ignorable="d" 
+             Width="495" BorderBrush="White" BorderThickness="1" x:ClassModifier="internal">
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="192*"/>
+            <ColumnDefinition Width="301*"/>
+        </Grid.ColumnDefinitions>
+        <CheckBox x:Name="CB_Enabled" Content="Plugin name" Grid.Column="0" Foreground="White" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,11,0,11" Click="CB_Enabled_Click" Height="23"/>
+
+        <Grid Grid.Column="1" Margin="6,0,5,0" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
+                <Button x:Name="BT_OpenSettings" Content="Paramètres" Style="{DynamicResource PrimaryButtonStyle}" Margin="2,0" Click="BT_OpenSettings_Click"/>
+                <Button x:Name="BT_UnInstall" Content="Désinstaller" Style="{DynamicResource PrimaryButtonStyle}" Margin="2,0" Click="BT_UnInstall_Click"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,187 @@
+﻿<Window x:Name="window" x:Class="Agenda_Virtuel.SchoolGradesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel"
+        xmlns:myf="clr-namespace:MyFunctions.ControlsWPF;assembly=MyFunctions"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Mes notes scolaires" Style="{DynamicResource WindowsStyle}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" >
+    <StackPanel Orientation="Vertical">
+        <local:WindowHeader/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="20*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter ShowsPreview="True" ResizeDirection="Columns" Grid.Column="1" Width="3" HorizontalAlignment="Left"/>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="5">
+                <StackPanel Orientation="Horizontal" Margin="0, 10" HorizontalAlignment="Center">
+                    <TextBlock Text="Notes de : " TextAlignment="Center" VerticalAlignment="Center" />
+                    <ComboBox x:Name="CBB_Subjects" Text="Sélectionner la matière" MinWidth="217" HorizontalContentAlignment="Center" SelectionChanged="CBB_Subjects_SelectionChanged"/>
+                    <Button x:Name="BT_DeleteSubject" Content="✘" ToolTip="Supprimer la matière" Background="{x:Null}" BorderBrush="White" Margin="2,0,0,0" Width="37" Foreground="Red" Click="BT_DeleteSubject_Click"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <DataGrid x:Name="DG_Grades" Height="364" HorizontalAlignment="Left" AutoGenerateColumns="False" ItemsSource="{Binding grades, Mode=TwoWay}" IsReadOnly="True">
+                            <DataGrid.Columns>
+
+                                <DataGridTemplateColumn Header="Note">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding To_String}" HorizontalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+
+                                <DataGridTemplateColumn Header="Coefficient">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Coeff}" HorizontalContentAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+                        <StackPanel Orientation="Vertical" Margin="10" Width="190" TextBlock.Foreground="White" TextBlock.FontSize="16">
+                            <Border BorderBrush="White" BorderThickness="1 ">
+                                <Border.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.15"/>
+                                </Border.Background>
+                                <StackPanel Orientation="Vertical" Margin="0,0,0,5" >
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5" >
+                                        <TextBlock Text="Moyenne : " FontWeight="ExtraBlack"/>
+                                        <TextBlock x:Name="TB_Average" Text="10 / 20" FontWeight="ExtraBlack"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5" >
+                                        <TextBlock Text="Meilleur note : "/>
+                                        <TextBlock x:Name="TB_BestGrade" Text="10 / 20" FontWeight="Medium"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5" >
+                                        <TextBlock Text="Note la plus faible : "/>
+                                        <TextBlock x:Name="TB_WorstGrade" Text="10 / 20" FontWeight="Medium"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+
+                            <Border BorderBrush="White" BorderThickness="1" Margin="0,5,0,0">
+                                <TextBlock x:Name="TB_Comment" Text="Commentaire :" TextWrapping="Wrap" TextAlignment="Center" Height="130">
+                                    <TextBlock.Background>
+                                        <SolidColorBrush Color="White" Opacity="0.15"/>
+                                    </TextBlock.Background>
+                                </TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="55*"/>
+                            <ColumnDefinition Width="45*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BT_AddGrade" Content="Ajouter une note" Style="{DynamicResource PrimaryButtonStyle}"  Margin="3, 0" Grid.Column="0" Click="BT_AddGrade_Click" />
+                        <Button x:Name="BT_DeleteGrade" Content="Supprimer la note" Style="{DynamicResource SecondaryButtonStyle}" Margin="3, 0" Grid.Column="1" Click="BT_DeleteGrade_Click" />
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <Border x:Name="Panel_AddGrade" Width="380" Height="150" Grid.Column="0" Visibility="Collapsed" BorderBrush="White" BorderThickness="2" Background="{DynamicResource WinBackgroundColor}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="2,0,0,42">
+                <Grid>
+                    <Grid.Background>
+                        <SolidColorBrush Color="Black" Opacity="0.4"/>
+                    </Grid.Background>
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Ajouter un note" Foreground="White" HorizontalContentAlignment="Center" FontSize="16" BorderBrush="White" BorderThickness="0,0,0,1" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <myf:NumericUpDown x:Name="NUD_AddGrade_Value" Min="0" Max="20" Value="10" FontSize="14" OnValueChanged="NUD_AddGrade_Value_ValueChanged"/>
+                            <Label Content=" / " Foreground="White"/>
+                            <myf:NumericUpDown x:Name="NUD_AddGrade_OutOf" Min="0" Max="20" Value="20" FontSize="14" OnValueChanged="NUD_AddGrade_OutOf_ValueChanged"/>
+                            <Label Content=" coeff :" Foreground="White"/>
+                            <myf:NumericUpDown x:Name="NUD_AddGrade_Coef" Min="0.1" Max="100" Value="1" FontSize="14"/>
+                        </StackPanel>
+                        <Label x:Name="LB_GradeOutOf20" Content="10 / 20" Foreground="White" FontSize="18" HorizontalContentAlignment="Center"/>
+                        <Button x:Name="BT_OK" Content="OK" Style="{DynamicResource PrimaryButtonStyle}" HorizontalAlignment="Right" Margin="0,0,2,0" Click="BT_OK_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="5,0">
+                <DataGrid x:Name="DG_Summary" HorizontalAlignment="Left" AutoGenerateColumns="False" AlternationCount="2147483647" ItemsSource="{Binding grades, Mode=TwoWay}" MaxHeight="462" IsReadOnly="True" SelectionChanged="DG_Summary_SelectionChanged">
+
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Highlight, ElementName=window}" Value="True"/>
+                                        <Condition Binding="{Binding Moy}" Value="True"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter Property="Background" Value="Green"/>
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Highlight, ElementName=window}" Value="True"/>
+                                        <Condition Binding="{Binding Moy}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter Property="Background" Value="Red"/>
+                                    </MultiDataTrigger.Setters>
+
+                                </MultiDataTrigger>
+
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="Orange"/>
+                                </Trigger>
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Matière">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}" HorizontalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Moyenne">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Average}" HorizontalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="Coefficient">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Coeff}" HorizontalContentAlignment="Center"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </StackPanel>
+
+        </Grid>
+        <Button x:Name="BT_NewTrimester" Content="Nouveau trimestre" Style="{DynamicResource PrimaryButtonStyle}" Margin="200,5" Click="BT_NewTrimester_Click"/>
+    </StackPanel>
+</Window>

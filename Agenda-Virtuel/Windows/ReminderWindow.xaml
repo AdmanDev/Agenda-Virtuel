@@ -1,0 +1,44 @@
+﻿<Window x:Class="Agenda_Virtuel.ReminderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Pense - Bête" Style="{DynamicResource WindowsStyle}" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" Width="1000" Height="800">
+    <StackPanel Orientation="Vertical">
+        <local:WindowHeader/>
+
+        <Button x:Name="BT_Add" Content="Ajouter un pense - bête" Style="{DynamicResource PrimaryButtonStyle}" Margin="8" Click="BT_Add_Click"/>
+
+        <Border x:Name="Panel_AddReminder" BorderBrush="White" BorderThickness="1" Background="{DynamicResource WinBackgroundColor}" Visibility="Collapsed">
+            <Grid >
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                </Grid.Background>
+                <GroupBox Header="Ajouter un pense - bête" Foreground="White" BorderBrush="White" FontSize="24" FontWeight="Bold">
+                    <Grid Margin="3">
+                        <StackPanel  Orientation="Vertical">
+                            <TextBox x:Name="TB" Height="90" Text="" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" Foreground="Black" BorderBrush="Black" Margin="8" FontWeight="Normal">
+                                <TextBox.Background>
+                                    <SolidColorBrush Color="White" Opacity="0.5"/>
+                                </TextBox.Background>
+                            </TextBox>
+                            <Button x:Name="BT_SaveReminder" Content="Enregistrer" Style="{DynamicResource PrimaryButtonStyle}" Click="BT_SaveReminder_Click"/>
+                        </StackPanel>
+
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </Border>
+
+        <GroupBox Header="Mes pense - bêtes" FontWeight="Bold">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="1,10" Height="658">
+                <StackPanel x:Name="SP_Reminders">
+
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+    </StackPanel>
+</Window>

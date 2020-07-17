@@ -1,0 +1,28 @@
+﻿<Window x:Class="Agenda_Virtuel.Windows.Notifications.HomeworksNotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Agenda_Virtuel.Windows.Notifications"
+        xmlns:agenda="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Agenda - Virtuel (Notification)" Height="450" Width="800" Style="{DynamicResource WindowsStyle}" Topmost="True" WindowStartupLocation="Manual" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid  x:Name="Grid_Header" Height="31">
+                <Grid.Background>
+                    <SolidColorBrush Color="Black" Opacity="0.15"/>
+                </Grid.Background>
+
+                <Label x:Name="LB_Title" Content="Agenda - Virtuel" Foreground="White" FontSize="18"/>
+                <Button x:Name="BT_Close" Background="{x:Null}" BorderBrush="{x:Null}" Click="BT_Close_Click" HorizontalAlignment="Right" >
+                    <Image Source="pack://application:,,,/Resources/Images/Close window.png"/>
+                </Button>
+            </Grid>
+
+            <Grid x:Name="Grid_Viewer" MaxHeight="416" Height="416">
+                <TextBlock Text="Vous n'avez pas de devoir pour les 15 prochains jours." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
