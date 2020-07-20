@@ -72,15 +72,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Calendar.DayView">
-      <HintPath>..\..\..\..\Mes DLL\Calendar\DayView\bin\Debug\Calendar.DayView.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Resources\DLL\Calendar.DayView.dll</HintPath>
     </Reference>
     <Reference Include="Lovatts.ColorEditor">
-      <HintPath>..\..\..\..\Mes DLL\WPF Color picker controls\BrushEditor\Lovatts.ColorEditor\bin\Release\Lovatts.ColorEditor.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Resources\DLL\Lovatts.ColorEditor.dll</HintPath>
     </Reference>
-    <Reference Include="MyFunctions">
-      <HintPath>..\..\MyFunctions\MyFunctions\bin\Release\MyFunctions.dll</HintPath>
+    <Reference Include="MyFunctions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\DLL\MyFunctions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -99,8 +98,7 @@
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="VelerSoftware.VoiceRecognitionLib">
-      <HintPath>..\..\..\..\Mes DLL\VelerSoftware.VoiceRecognitionLib.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Resources\DLL\VelerSoftware.VoiceRecognitionLib.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -412,16 +410,12 @@
     <Resource Include="Logo Agenda-Virtuel ICO.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\DLL\FluentFTP.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\AgendaAndroid\AgendaAndroid.png" />
     <Resource Include="Resources\Images\AgendaAndroid\AgendaVirtuel_Android_QRCode.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\DLL\BouncyCastle.Crypto.dll" />
     <EmbeddedResource Include="Resources\DLL\Google.Protobuf.dll" />
-    <EmbeddedResource Include="Resources\DLL\MySql.Data.dll" />
     <EmbeddedResource Include="Resources\DLL\Renci.SshNet.dll" />
   </ItemGroup>
   <ItemGroup>

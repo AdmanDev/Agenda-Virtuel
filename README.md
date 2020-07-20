@@ -18,7 +18,7 @@
 </figure>
 <figure>
 	<a href="https://www.youtube.com/watch?v=eO5em08Lg8g&amp;feature=youtu.be">
-		<img src="https://i9.ytimg.com/vi/eO5em08Lg8g/maxresdefault.jpg?time=1594989989913&amp;sqp=CMy6xvgF&amp;rs=AOn4CLDP4-qsQL5WKjY2Dc643KXf_ZKZiQ" alt="Interface de l'Agenda-Virtuel">
+		<img src="https://i.ibb.co/5T3N87n/Agenda-Virtuel.jpg" alt="Vidéo de présentation de l'Agenda-Virtuel" width="1000">
 	</a>
 	<figurecaption>
 		<a href="https://www.youtube.com/watch?v=eO5em08Lg8g&amp;feature=youtu.be">
