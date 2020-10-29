@@ -78,11 +78,13 @@
                         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                             <GroupBox Header="Matières"  FontWeight="Bold" Margin="10,4" Foreground="White">
                                 <StackPanel Orientation="Vertical" TextBlock.FontWeight="Normal">
-                                    <Label Content="Une matière par ligne !" FontWeight="SemiBold" HorizontalContentAlignment="Center" Background="{x:Null}" Foreground="#FFFDBFBF"/>
-                                    <TextBox x:Name="TB_Subjects" AcceptsReturn="True" AcceptsTab="True" FontWeight="Normal" HorizontalContentAlignment="Center" Height="100" VerticalScrollBarVisibility="Visible" TextChanged="TB_Subjects_TextChanged" />
-                                    <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Center" >
-                                        <Button x:Name="BT_DefaultSubjects" Content="Par défaut" Style="{DynamicResource PrimaryButtonStyle}" Margin="5,0,0,0" Click="BT_DefaultSubjects_Click" />
-                                    </StackPanel>
+                                    <ScrollViewer x:Name="SV_Subjects" VerticalScrollBarVisibility="Auto" Height="120">
+                                        <StackPanel x:Name="SP_subjects" Orientation="Vertical" Background="White"/>
+                                    </ScrollViewer>
+                                    <Grid Margin="2" HorizontalAlignment="Stretch" >
+                                        <Button x:Name="BT_DefaultSubjects" Content="Par défaut" Style="{DynamicResource PrimaryButtonStyle}" Margin="5,0,0,0" HorizontalAlignment="Left" Click="BT_DefaultSubjects_Click" />
+                                        <Button x:Name="BT_AddSubject" Content="Ajouter" Style="{DynamicResource PrimaryButtonStyle}" Margin="0,0,5,0" HorizontalAlignment="Right" Click="BT_AddSubject_Click" />
+                                    </Grid>
                                 </StackPanel>
                             </GroupBox>
 

@@ -58,18 +58,17 @@ namespace Agenda_Virtuel
         {
             caAppointments.Clear();
             Calendar.Appointment app;
-            Color sColor;
             for (int i = 0; i < Global.userData.scheduleAppointments.Count; i++)
             {
-                sColor = Global.userData.settings.Subjects.GetColorOf(Global.userData.scheduleAppointments[i].Title);
-
+                string title = Global.userData.scheduleAppointments[i].Title;
+                
                 app = new Calendar.Appointment
                 {
                     StartDate = Global.userData.scheduleAppointments[i].StartTime,
                     EndDate = Global.userData.scheduleAppointments[i].EndTime,
-                    Title = Global.userData.scheduleAppointments[i].Title,
+                    Title = title,
                     TextColor = subjectsColor,
-                    Color = sColor,
+                    Color = GetColorOf(title),
                     //Locked = true
                 };
 
@@ -77,6 +76,18 @@ namespace Agenda_Virtuel
             }
 
             this.dayView.Invalidate();
+        }
+
+        private Color GetColorOf(string title)
+        {
+            Color sColor = Color.White;
+            Subject subject = Global.userData.settings.Subjects.Find(x => x.Name == title);
+            if (subject != null)
+            {
+                sColor = subject.Color;
+            }
+
+            return sColor;
         }
 
         //Show appontments
@@ -97,15 +108,13 @@ namespace Agenda_Virtuel
 
         private void OnAppointmentAdded(Appointment appointment)
         {
-            Color sColor = Global.userData.settings.Subjects.GetColorOf(appointment.Title);
-
             Calendar.Appointment capp = new Calendar.Appointment()
             {
                 Title = appointment.Title,
                 StartDate = appointment.StartTime,
                 EndDate = appointment.EndTime,
                 TextColor = subjectsColor,
-                Color = sColor,
+                Color = GetColorOf(appointment.Title),
                 //Locked = true
             };
 

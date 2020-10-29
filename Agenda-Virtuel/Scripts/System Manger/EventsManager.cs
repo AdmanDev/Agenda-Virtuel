@@ -25,7 +25,8 @@ namespace Agenda_Virtuel.Manager
         public delegate void ColorsSettingsDelegate(ColorsSettings newColors);
         public delegate void FontChangedDelegate(FontTarget target, FontGroup font);
         public delegate void FontsSettingsDelegate(FontsSettings newFonts);
-        public delegate void SubjectsListChangedDelegate(string[] subjects);
+        public delegate void SubjectsListDelegate(List<Subject> subjectsList);
+        public delegate void SubjectDelegate(Subject subject);
         public delegate void ShortcutWordsChangedDelegate(string[] words);
 
         public delegate void SubjectGradeDelegate(Subject subject, Grade grade);
@@ -35,7 +36,7 @@ namespace Agenda_Virtuel.Manager
         public delegate void ReminderDelegate(string reminder);
 
         public delegate void AppointmentDelegate(Appointment appointment);
-        public delegate void SubjectColorChangedDelegate(string subject, System.Drawing.Color color);
+        public delegate void SubjectColorChangedDelegate(Subject subject, System.Drawing.Color color);
 
 
         /*______________________________________EVENTS______________________________________*/
@@ -130,9 +131,17 @@ namespace Agenda_Virtuel.Manager
         /// </summary>
         public static event FontsSettingsDelegate FontsSettingsChanged;
         /// <summary>
-        /// This event is triggered whenever the list of user subjects is changed.
+        /// This event is triggered whenever a subject is added.
         /// </summary>
-        public static event SubjectsListChangedDelegate SubjectsListChanged;
+        public static event SubjectDelegate SubjectAdded;
+        /// <summary>
+        /// This event is triggered whenever a subject is deleted.
+        /// </summary>
+        public static event SubjectDelegate SubjectDeleted;
+        /// <summary>
+        /// This event is triggered whenever subjects list is changed.
+        /// </summary>
+        public static event SubjectsListDelegate SubjectsListChanged;
         /// <summary>
         /// This event is triggered whenever the list of shortcut words is changed.
         /// </summary>
@@ -147,14 +156,6 @@ namespace Agenda_Virtuel.Manager
         /// This event is triggered whenever a school grade is removed.
         /// </summary>
         public static event SubjectGradeDelegate SchoolGradeRemoved;
-        /// <summary>
-        /// This event is triggered whenever a subject is added in the "school grades" window.
-        /// </summary>
-        public static event SchoolGradeSubjectDelegate SchoolGrade_SubjectAdded;
-        /// <summary>
-        /// This event is triggered whenever a subject is removed from the "school grades" window.
-        /// </summary>
-        public static event SchoolGradeSubjectDelegate SchoolGrade_SubjectRemoved;
         /// <summary>
         /// This event is triggered whenever user (or other) clicks on the "new trimester" button.
         /// </summary>
@@ -419,10 +420,28 @@ namespace Agenda_Virtuel.Manager
         }
 
         /// <summary>
+        /// Invoke SubjectAdded event
+        /// </summary>
+        /// <param name="subject">New subject</param>
+        internal static void Call_SubjectAdded(Subject subject)
+        {
+            SubjectAdded?.Invoke(subject);
+        }
+
+        /// <summary>
+        /// Invoke SubjectAdded event
+        /// </summary>
+        /// <param name="subject">New subject</param>
+        internal static void Call_SubjectDeleted(Subject subject)
+        {
+            SubjectDeleted?.Invoke(subject);
+        }
+
+        /// <summary>
         /// Invoke SubjectsListChanged event
         /// </summary>
         /// <param name="subjects">New subjects list</param>
-        internal static void Call_SubjectsListChanged(string[] subjects)
+        internal static void Call_SubjectsListChanged(List<Subject> subjects)
         {
             SubjectsListChanged?.Invoke(subjects);
         }
@@ -454,24 +473,6 @@ namespace Agenda_Virtuel.Manager
         internal static void Call_SchoolGradeRemoved(Subject subject, Grade grade)
         {
             SchoolGradeRemoved?.Invoke(subject, grade);
-        }
-
-        /// <summary>
-        /// Invoke SchoolGrade_SubjectAdded event
-        /// </summary>
-        /// <param name="subject">New school subject</param>
-        internal static void Call_SubjectAdded(Subject subject)
-        {
-            SchoolGrade_SubjectAdded?.Invoke(subject);
-        }
-
-        /// <summary>
-        /// Invoke SchoolGrade_SubjectRemoved event
-        /// </summary>
-        /// <param name="subject">Removed school subject</param>
-        internal static void Call_SubjectRemoved(Subject subject)
-        {
-            SchoolGrade_SubjectRemoved?.Invoke(subject);
         }
 
         /// <summary>
@@ -532,7 +533,7 @@ namespace Agenda_Virtuel.Manager
         /// </summary>
         /// <param name="subject">Subject whose color has been changed</param>
         /// <param name="color">New color of subject</param>
-        internal static void Call_SubjectColorChanged(string subject, System.Drawing.Color color)
+        internal static void Call_SubjectColorChanged(Subject subject, System.Drawing.Color color)
         {
             SubjectColorChanged?.Invoke(subject, color);
         }

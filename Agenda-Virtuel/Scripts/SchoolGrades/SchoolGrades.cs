@@ -12,7 +12,6 @@ namespace Agenda_Virtuel
         //Options variables
         private bool showComments;
         private bool highlighResult;
-        private List<Subject> subjects;
 
         //Properties
         /// <summary>
@@ -29,7 +28,7 @@ namespace Agenda_Virtuel
                         grades.Add(new Grade(cs.Average, 20, cs.Coeff));
                 }
 
-                return new Subject("Moyenne générale", 1, grades);
+                return new Subject("Moyenne générale", 1, System.Drawing.Color.Black, grades);
             }
         }
 
@@ -44,7 +43,7 @@ namespace Agenda_Virtuel
         /// <summary>
         /// The list of user subject.
         /// </summary>
-        public List<Subject> Subjects { get => subjects; set => subjects = value; }
+        public List<Subject> Subjects { get => Global.userData.settings.Subjects;  }
 
         //Constructors
         /// <summary>
@@ -54,16 +53,6 @@ namespace Agenda_Virtuel
         {
             ShowComments = true;
             HighlighResult = true;
-            Subjects = new List<Subject>();
-        }
-
-        /// <summary>
-        /// Instanciate new SchoolGrades object
-        /// </summary>
-        /// <param name="_subjects">Subjects list to include</param>
-        public SchoolGrades(List<Subject> _subjects)
-        {
-            Subjects = _subjects;
         }
 
         /// <summary>

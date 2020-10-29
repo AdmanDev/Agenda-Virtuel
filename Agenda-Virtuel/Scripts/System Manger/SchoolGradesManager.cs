@@ -53,55 +53,6 @@
         }
 
         /// <summary>
-        /// Add a school subject.
-        /// </summary>
-        /// <param name="subject">The <c>Subject</c> to add.</param>
-        /// <param name="save">If true, this change will be saved.</param>
-        public static void AddSubject(Subject subject, bool save = true)
-        {
-            Global.userData.schoolGrades.Subjects.Add(subject);
-            EventsManager.Call_SubjectAdded(subject);
-
-            if (save)
-            {
-                Save.SaveData();
-
-            }
-        }
-
-        /// <summary>
-        /// Add a school subject.
-        /// </summary>
-        /// <param name="subjectName">The name of subject to add.</param>
-        /// <param name="coeff">The coefficient of the subject.</param>
-        /// <param name="save">If true, this change will be saved.</param>
-        /// <returns><c>Subject</c> object.</returns>
-        public static Subject AddSubject(string subjectName, float coeff, bool save = true)
-        {
-            Subject s = new Subject(subjectName, coeff);
-            AddSubject(s, save);
-
-            return s;
-        }
-
-        /// <summary>
-        /// Remove a subject.
-        /// </summary>
-        /// <param name="subject">The <c>Subject</c> to remove.</param>
-        /// <param name="save">If true, this change will be saved.</param>
-        public static void RemoveSubject(Subject subject, bool save = true)
-        {
-            Global.userData.schoolGrades.Subjects.Remove(subject);
-            EventsManager.Call_SubjectRemoved(subject);
-
-            if (save)
-            {
-                Save.SaveData();
-
-            }
-        }
-
-        /// <summary>
         /// Start a new trimester and remove all school grades of all subjects.
         /// </summary>
         /// <param name="oldGrades"><c>SchoolGrades</c> of the last trimester</param>

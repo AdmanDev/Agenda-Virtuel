@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Agenda_Virtuel
 {
@@ -42,9 +41,6 @@ namespace Agenda_Virtuel
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Global.userData.schoolGrades.Subjects.Count <= 0)
-                CreateSubjects();
-
             UpdateAll();
         }
 
@@ -63,38 +59,11 @@ namespace Agenda_Virtuel
             this.DG_Summary.ItemsSource = _subjects;
         }
 
-        private void CreateSubjects()
-        {
-            foreach (string s in Global.userData.settings.SubjectsStrings)
-            {
-                if (Global.userData.schoolGrades.Subjects.Find(x => x.Name == s) == null)
-                {
-                    CreateSubject(s);
-                }
-            }
-        }
-
-        private bool CreateSubject(string s)
-        {
-            if (string.IsNullOrEmpty(s))
-                return false;
-
-            MyFunctions.ControlsWPF.InputBox nib = new MyFunctions.ControlsWPF.InputBox("Saisissez le coefficient pour : " + s, true);
-
-            if (nib.ShowDialog() == true)
-            {
-                SchoolGradesManager.AddSubject(new Subject(s, nib.ValueToFloat()));
-                return true;
-            }
-
-            return false;
-        }
-
         private void LoadSubjects()
         {
             this.CBB_Subjects.Items.Clear();
 
-            Global.userData.schoolGrades.Subjects.ForEach
+            Global.userData.settings.Subjects.ForEach
                 (
                     x =>
                     {
@@ -102,50 +71,17 @@ namespace Agenda_Virtuel
                     }
                 );
 
-            Button BT_AddSubject = new Button()
-            {
-                Content = "Ajouter une matière",
-                Background = new SolidColorBrush(Colors.LightBlue)
-            };
-            BT_AddSubject.Click += BT_AddSubject_Click;
-            this.CBB_Subjects.Items.Add(BT_AddSubject);
-
             if (this.CBB_Subjects.Items.Count > 0)
                 this.CBB_Subjects.SelectedIndex = 0;
             else
                 Reset();
         }
 
-        private void BT_AddSubject_Click(object sender, RoutedEventArgs e)
-        {
-            AddSubject();
-        }
-
-        private void AddSubject()
-        {
-            MyFunctions.ControlsWPF.InputBox ib = new MyFunctions.ControlsWPF.InputBox("Nom de la nouvelle matière :", false);
-            if (ib.ShowDialog() == true)
-            {
-                if (CreateSubject(ib.Value))
-                {
-                    LoadSubjects();
-                }
-            }
-
-            if (this.CBB_Subjects.Items.Count >= 2)
-                this.CBB_Subjects.SelectedIndex = this.CBB_Subjects.Items.Count - 2;
-        }
 
         private void CBB_Subjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count <= 0)
                 return;
-
-            if (this.CBB_Subjects.SelectedIndex == this.CBB_Subjects.Items.Count - 1)
-            {
-                AddSubject();
-                return;
-            }
 
             selectedSubject = (Subject)e.AddedItems[0];
             ShowSubject();
@@ -184,7 +120,7 @@ namespace Agenda_Virtuel
             if (Global.userData.schoolGrades.ShowComments)
             {
                 string comment;
-                float average = selectedSubject.Average;
+                double average = selectedSubject.Average;
 
                 if (average <= 7)
                     comment = Comments.VeryBad_0_7;
@@ -226,9 +162,9 @@ namespace Agenda_Virtuel
             if (this.LB_GradeOutOf20 == null || this.NUD_AddGrade_Value == null || this.NUD_AddGrade_OutOf == null)
                 return;
 
-            float grade = (float)this.NUD_AddGrade_Value.Value;
-            float outOf = (float)this.NUD_AddGrade_OutOf.Value;
-            float result = (grade / outOf) * 20;
+            double grade = this.NUD_AddGrade_Value.Value;
+            double outOf = this.NUD_AddGrade_OutOf.Value;
+            double result = (grade / outOf) * 20;
 
             this.LB_GradeOutOf20.Content = Math.Round(result, 2) + " / 20";
         }
@@ -272,19 +208,6 @@ namespace Agenda_Virtuel
                 SchoolGradesManager.RemoveGrade(selectedSubject, gradeToDelete);
 
                 ShowSubject();
-            }
-        }
-
-        private void BT_DeleteSubject_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedSubject == null)
-                return;
-
-            string msg = "Êtes vous sûr de vouloir supprimer cette matière ainsi que ses notes ?";
-            if (System.Windows.Forms.MessageBox.Show(msg, "Agenda - Virtuel", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-            {
-                SchoolGradesManager.RemoveSubject(selectedSubject);
-                LoadSubjects();
             }
         }
 

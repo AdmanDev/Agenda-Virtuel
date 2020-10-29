@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Agenda_Virtuel.Manager;
@@ -84,9 +85,9 @@ namespace Agenda_Virtuel
                 this.CBB_SortHomeworks.Items.Add(op);
             }
 
-            foreach (string subject in Global.userData.settings.SubjectsStrings)
+            foreach (Subject subject in Global.userData.settings.Subjects)
             {
-                this.CBB_SortHomeworks.Items.Add(subject);
+                this.CBB_SortHomeworks.Items.Add(subject.Name);
             }
         }
 
@@ -293,7 +294,7 @@ namespace Agenda_Virtuel
         /// Whenever the subjects list is changed, update sorting combobox
         /// </summary>
         /// <param name="subjects">New subbjects list</param>
-        private void OnSubjectsListChanged(string[] subjects)
+        private void OnSubjectsListChanged(List<Subject> subjects)
         {
             LoadSortingCBB();
         }

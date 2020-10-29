@@ -110,13 +110,13 @@ namespace Agenda_Virtuel
         /// Load user data from xml code
         /// </summary>
         /// <param name="xmlCode">Your xml code</param>
-        public static void LoadFromXml(string xmlCode)
-        {
-            Global.userData = XmlSaveRead.Read(xmlCode);
+        //public static void LoadFromXml(string xmlCode)
+        //{
+        //    Global.userData = XmlSaveRead.Read(xmlCode);
 
-            Global.userData.settings.colors = new ColorsSettings();
-            Global.userData.settings.colors.DeserializeXaml(Global.userData.settings);
-        }
+        //    Global.userData.settings.colors = new ColorsSettings();
+        //    Global.userData.settings.colors.DeserializeXaml(Global.userData.settings);
+        //}
 
         /// <summary>
         /// Load and Apply a save object

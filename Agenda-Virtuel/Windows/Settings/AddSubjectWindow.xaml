@@ -1,0 +1,25 @@
+﻿<Window x:Class="Agenda_Virtuel.Windows.Settings.AddSubjectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:myf="clr-namespace:MyFunctions.ControlsWPF;assembly=MyFunctions"
+        xmlns:local="clr-namespace:Agenda_Virtuel"
+        mc:Ignorable="d"
+        x:ClassModifier="internal" Title="Ajouer une matière" Width="400" Style="{DynamicResource WindowsStyle}" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+    <StackPanel Orientation="Vertical">
+        <local:WindowHeader />
+        <StackPanel Orientation="Vertical">
+            <GroupBox Header="Nom de la matière">
+                <TextBox x:Name="TB_Name" Margin="10, 0"/>
+            </GroupBox>
+            <GroupBox Header="Coefficient">
+                <myf:NumericUpDown x:Name="NUD_Coeff" Min="0" Value="1"  FontSize="16" />
+            </GroupBox>
+            <GroupBox Header="Couleur">
+                <Button x:Name="BT_Color" Content="Choisir la couleur..." FontSize="18" Margin="10, 0" Click="BT_Color_Click" />
+            </GroupBox>
+            <Button x:Name="BT_Validate" Content="Ajouter" Style="{DynamicResource PrimaryButtonStyle}" Margin="5, 20, 5, 2" Click="BT_Validate_Click" />
+        </StackPanel>
+    </StackPanel>
+</Window>

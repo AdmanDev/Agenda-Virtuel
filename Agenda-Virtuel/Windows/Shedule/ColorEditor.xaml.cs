@@ -8,7 +8,7 @@ namespace Agenda_Virtuel.Windows.Shedule
     internal partial class ColorEditor : System.Windows.Controls.UserControl
     {
         //Variables
-        private readonly string subject;
+        private readonly Subject subject;
         private System.Drawing.Color color;
         private System.Windows.Forms.ColorDialog cd;
 
@@ -26,7 +26,7 @@ namespace Agenda_Virtuel.Windows.Shedule
         }
 
         //Constructor
-        public ColorEditor(string _subject)
+        public ColorEditor(Subject _subject)
         {
             InitializeComponent();
 
@@ -39,9 +39,9 @@ namespace Agenda_Virtuel.Windows.Shedule
             };
 
             subject = _subject;
-            SelectedColor = Global.userData.settings.Subjects.GetColorOf(_subject);
+            SelectedColor = subject.Color;
 
-            this.LB_Subject.Content = _subject;
+            this.LB_Subject.Content = _subject.Name;
         }
 
         private void BT_ChangeColor_Click(object sender, RoutedEventArgs e)

@@ -66,8 +66,6 @@ namespace Agenda_Virtuel
             EventsManager.SubjectColorChanged += OnSubjectColorChanged;
 
             ////SchoolGrades
-            EventsManager.SchoolGrade_SubjectAdded += On_SchoolGrade_SubjectAdded;
-            EventsManager.SchoolGrade_SubjectRemoved += On_SchoolGrade_SubjectRemoved;
             EventsManager.SchoolGradeAdded += On_SchoolGrades_GradeAdded;
             EventsManager.SchoolGradeRemoved += On_SchoolGrades_GradeRemoved;
             EventsManager.NewTrimesterEvent += OnNewTrimesterEvent;
@@ -230,7 +228,7 @@ namespace Agenda_Virtuel
             });
         }
 
-        private static void OnSubjectsListChanged(string[] subjects)
+        private static void OnSubjectsListChanged(List<Subject> subjects)
         {
             Execute(async () =>
             {
@@ -243,17 +241,16 @@ namespace Agenda_Virtuel
                 await Functions.SendPostRequest(elements, PHPsubjectURL);
 
                 string values = "";
-                for (int i = 0; i < subjects.Length; i++)
+                for (int i = 0; i < subjects.Count; i++)
                 {
-                    Color color = Global.userData.settings.Subjects.GetColorOf(subjects[i]);
-                    string colorString = ColorTranslator.ToHtml(color);
+                    string colorString = ColorTranslator.ToHtml(subjects[i].Color);
 
                     if(i > 0)
                     {
                         values += Environment.NewLine;
                     }
 
-                    values += subjects[i] + ";" + colorString;
+                    values += subjects[i].Name + ";" + colorString + ";" + subjects[i].Coeff;
                 }
 
                 elements = new FormUrlEncodedContent(new[]
@@ -656,7 +653,7 @@ namespace Agenda_Virtuel
             });
         }
 
-        private static void OnSubjectColorChanged(string subject, Color color)
+        private static void OnSubjectColorChanged(Subject subject, Color color)
         {
             Execute(async () =>
             {
@@ -664,7 +661,7 @@ namespace Agenda_Virtuel
                 {
                     new KeyValuePair<string, string>("mode", "update"),
                     new KeyValuePair<string, string>("user", UserID.ToString()),
-                    new KeyValuePair<string, string>("title", subject),
+                    new KeyValuePair<string, string>("title", subject.Name),
                     new KeyValuePair<string, string>("color", ColorTranslator.ToHtml(color))
                 });
 
@@ -801,8 +798,10 @@ namespace Agenda_Virtuel
                 Global.userData.homeworks = await GetHomeworksAsync();
 
                 //Get settings
+                object[] subjects = await GetSubjectsAsync();
+
                 Global.userData.settings.PluginSettings.enabled = await GetPluginEnabledAsync();
-                Global.userData.settings.Subjects = await GetSubjectsAsync();
+                Global.userData.settings.Subjects = (List<Subject>)subjects[1];
                 Global.userData.settings.serialisableColors = await GetColorsSettingsAsync();
                 Global.userData.settings.ShortcutWords = await GetShortcutWordsAsync();
                 Global.userData.settings.fonts = await GetFontsSettingsAsync();
@@ -811,7 +810,7 @@ namespace Agenda_Virtuel
                 //Get others modules
                 Global.userData.reminders = await GetRemindersAsync();
                 Global.userData.scheduleAppointments = await GetAppointmentsAsync();
-                Global.userData.schoolGrades = await GetSchoolGradesAsync();
+                Global.userData.schoolGrades = (SchoolGrades)subjects[0];
 
                 //update
                 lastDataUpdate = MyWebRequest.GetWebTime();
@@ -857,27 +856,30 @@ namespace Agenda_Virtuel
             return homeworks;
         }
 
-        private static async Task<SchoolGrades> GetSchoolGradesAsync()
+        private static async Task<object[]> GetSubjectsAsync()
         {
             SchoolGrades schoolGrades = new SchoolGrades();
+            List<Subject> subjectsList = new List<Subject>();
 
             XElement json = await GetUserDataAsync(PHPschoolgradesURL);
 
-            int i = 0;
-            foreach (XElement xe in json.Elements())
+            if (json.Element("options") != null)
             {
-                if (i == 0)
+                XElement jOption = json.Element("options");
+                schoolGrades.ShowComments = jOption.Element("ShowComments")?.Value == "1";
+                schoolGrades.HighlighResult = jOption.Element("HighlighResult")?.Value == "1";
+            }
+            if (json.Element("subjects") != null)
+            {
+                XElement jSubjects = json.Element("subjects");
+                foreach (XElement sub in jSubjects.Elements())
                 {
-                    schoolGrades.ShowComments = xe.Element("ShowComments")?.Value == "1";
-                    schoolGrades.HighlighResult = xe.Element("HighlighResult")?.Value == "1";
-                }
-                else
-                {
-                    string name = xe.Element("Name")?.Value;
-                    float coeff = float.Parse(xe.Element("Coeff")?.Value.Replace(".", ","));
-                    XElement grades = xe.Element("grades");
+                    string title = sub.Element("Title")?.Value;
+                    float coeff = float.Parse(sub.Element("Coeff")?.Value.Replace(".", ","));
+                    Color color = ColorManager.FromHexa(sub.Element("Color")?.Value);
+                    XElement grades = sub.Element("grades");
 
-                    Subject subject = new Subject(name, coeff);
+                    Subject subject = new Subject(title, coeff, color);
 
                     foreach (XElement g in grades.Elements())
                     {
@@ -890,13 +892,11 @@ namespace Agenda_Virtuel
                         subject.grades.Add(theGrade);
                     }
 
-                    schoolGrades.Subjects.Add(subject);
+                    subjectsList.Add(subject);
                 }
-
-                i++;
             }
 
-            return schoolGrades;
+            return new object[] { schoolGrades, subjectsList };
 
         }
 
@@ -1018,29 +1018,6 @@ namespace Agenda_Virtuel
             }
 
             return scw.ToArray();
-        }
-
-        public static async Task<Subjects> GetSubjectsAsync()
-        {
-            XElement json = await GetUserDataAsync(PHPsubjectURL);
-
-            Subjects subjects = new Subjects();
-            subjects.Clear();
-
-            foreach (XElement xe in json.Elements())
-            {
-                string title = xe.Element("Title")?.Value;
-                string colorString = xe.Element("Color")?.Value;
-
-                subjects.Add(title, ColorManager.FromHexa(colorString));
-            }
-
-            if(subjects.TheSubjects.Length <= 0)
-            {
-                subjects = new Subjects();
-            }
-
-            return subjects;
         }
 
         private static async Task<List<string>> GetColorsSettingsAsync()

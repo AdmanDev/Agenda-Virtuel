@@ -58,10 +58,9 @@
         /// <param name="subject">The subject whose color will be set.</param>
         /// <param name="color">The new color of the subject</param>
         /// <param name="save">If true, this change will be saved.</param>
-        public static void SetSubjectColor(string subject, System.Drawing.Color color, bool save = true)
+        public static void SetSubjectColor(Subject subject, System.Drawing.Color color, bool save = true)
         {
-            Global.userData.settings.Subjects.SetColorOf(subject, color);
-
+            subject.Color = color;
             EventsManager.Call_SubjectColorChanged(subject, color);
 
             if (save)

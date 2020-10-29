@@ -10,6 +10,8 @@ using Agenda_Virtuel.Plugin;
 using System.Windows.Controls;
 using System.Reflection;
 using Button = System.Windows.Controls.Button;
+using Agenda_Virtuel.Windows.Settings;
+using System.Collections.Generic;
 
 namespace Agenda_Virtuel
 {
@@ -73,6 +75,7 @@ namespace Agenda_Virtuel
 
             EventsManager.ColorsSettingsChanged += OnColorsSettingsChanged;
             EventsManager.DatasDownloaded += OnDatasDownloaded;
+            EventsManager.SubjectsListChanged += OnSubjectsListChanged;
         }
 
         private void OnDatasDownloaded(Save save)
@@ -181,15 +184,12 @@ namespace Agenda_Virtuel
 
         private void ShowCurrentSubjectsList()
         {
-            string subjects = "";
-            foreach (string s in settings.SubjectsStrings)
+            this.SP_subjects.Children.Clear();
+            foreach (Subject s in settings.Subjects)
             {
-                if (string.IsNullOrEmpty(subjects))
-                    subjects = s;
-                else
-                    subjects += Environment.NewLine + s;
+                SubjectView view = new SubjectView(s);
+                this.SP_subjects.Children.Add(view);
             }
-            this.TB_Subjects.Text = subjects;
         }
 
         private void ShowCurrentShortcutWords()
@@ -434,30 +434,20 @@ namespace Agenda_Virtuel
 
         #region Subjects list
 
-        bool tb_subject_firstChange = true;
-        bool tb_subject_Changed = false;
-        private void TB_Subjects_TextChanged(object sender, TextChangedEventArgs e)
+        private void OnSubjectsListChanged(List<Subject> subjectsList)
         {
-            if (tb_subject_firstChange || tb_subject_Changed)
-            {
-                tb_subject_firstChange = false;
-                return;
-            }
+            ShowCurrentSubjectsList();
+        }
 
-            OnClosing += () =>
-            {
-                string[] subjects = this.TB_Subjects.Text.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                SettingsManager.SetSubjectList(subjects, false);
-            };
-
-            tb_subject_Changed = true;
-            save = true;
+        private void BT_AddSubject_Click(object sender, RoutedEventArgs e)
+        {
+            new AddSubjectWindow().ShowDialog();
+            this.SV_Subjects.ScrollToBottom();
         }
 
         private void BT_DefaultSubjects_Click(object sender, RoutedEventArgs e)
         {
-            SettingsManager.SetSubjectList(Settings.defaultSettings.SubjectsStrings);
-            ShowCurrentSubjectsList();
+            SettingsManager.SetSubjectList(Settings.defaultSettings.Subjects);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using Agenda_Virtuel.Manager;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -48,7 +49,7 @@ namespace Agenda_Virtuel.Windows.Shedule
                 Mask = "00:00"
             };
 
-            this.CBB_Subjects.ItemsSource = Global.userData.settings.SubjectsStrings;
+            this.CBB_Subjects.ItemsSource = Global.userData.settings.Subjects;
             this.WFH_StartTime.Child = this.TB_StartTime;
             this.WFH_EndTime.Child = this.TB_EndTime;
 
@@ -63,7 +64,7 @@ namespace Agenda_Virtuel.Windows.Shedule
             this.TB_EndTime.Text = _endTime;
         }
 
-        private void OnSubjectsListChanged(string[] subjects)
+        private void OnSubjectsListChanged(List<Subject> subjects)
         {
             this.CBB_Subjects.ItemsSource = subjects;
         }

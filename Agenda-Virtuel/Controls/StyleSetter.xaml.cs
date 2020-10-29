@@ -95,7 +95,7 @@ namespace Agenda_Virtuel.Controls
 
             Setter s = GetProperty(Control.BorderThicknessProperty);
             if (s != null && s.Value != null)
-                this.NUD_BorderThickness.Value = (float)((Thickness)s.Value).Left;
+                this.NUD_BorderThickness.Value = ((Thickness)s.Value).Left;
 
             this.LB_FontFamily.Text = ((FontFamily)GetProperty(Control.FontFamilyProperty)?.Value)?.ToString();
         }

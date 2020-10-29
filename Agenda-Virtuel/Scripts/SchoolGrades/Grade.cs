@@ -47,8 +47,6 @@ namespace Agenda_Virtuel
         /// </summary>
         public float Coeff { get => coeff; set => coeff = value; }
 
-        public string To_String { get => this.ToString(); }
-
         //Constructors
         /// <summary>
         /// Instantiate a Grade

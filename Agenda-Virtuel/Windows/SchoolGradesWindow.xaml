@@ -21,7 +21,6 @@
                 <StackPanel Orientation="Horizontal" Margin="0, 10" HorizontalAlignment="Center">
                     <TextBlock Text="Notes de : " TextAlignment="Center" VerticalAlignment="Center" />
                     <ComboBox x:Name="CBB_Subjects" Text="Sélectionner la matière" MinWidth="217" HorizontalContentAlignment="Center" SelectionChanged="CBB_Subjects_SelectionChanged"/>
-                    <Button x:Name="BT_DeleteSubject" Content="✘" ToolTip="Supprimer la matière" Background="{x:Null}" BorderBrush="White" Margin="2,0,0,0" Width="37" Foreground="Red" Click="BT_DeleteSubject_Click"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
@@ -32,7 +31,7 @@
                                 <DataGridTemplateColumn Header="Note">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding To_String}" HorizontalContentAlignment="Center"/>
+                                            <Label Content="{Binding TheGrade}" HorizontalContentAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

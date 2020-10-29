@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using MyFunctions;
 
 namespace Agenda_Virtuel
 {
@@ -19,6 +21,10 @@ namespace Agenda_Virtuel
         /// </summary>
         private float subjectCoeff = 1;
         /// <summary>
+        /// Color of subject. (used in schedule)
+        /// </summary>
+        private Color color;
+        /// <summary>
         /// The grades list of the subject.
         /// </summary>
         public List<Grade> grades = new List<Grade>();
@@ -37,6 +43,10 @@ namespace Agenda_Virtuel
         /// The coefficient of the subject.
         /// </summary>
         public float Coeff { get => subjectCoeff; set => subjectCoeff = value; }
+        /// <summary>
+        /// Color of subject. (used in schedule)
+        /// </summary>
+        public Color Color { get => color; set => color = value; }
         /// <summary>
         /// Get the school grades average of the subject.
         /// </summary>
@@ -138,14 +148,19 @@ namespace Agenda_Virtuel
         /// </summary>
         /// <param name="_subjectName">Name of subject</param>
         /// <param name="_subjectCoeff">Coefficient of subject</param>
+        /// <param name="_color">Subject color</param>
         /// <param name="_grades">User school grades list in this subject</param>
-        public Subject(string _subjectName, float _subjectCoeff, List<Grade> _grades = null)
+        public Subject(string _subjectName, float _subjectCoeff, Color _color, List<Grade> _grades = null)
         {
+            if (_color == null)
+                _color = ColorManager.GenerateColor();
+
             if (_grades == null)
                 _grades = new List<Grade>();
 
             name = _subjectName;
             subjectCoeff = _subjectCoeff;
+            color = _color;
             grades = _grades;
         }
 
@@ -156,6 +171,28 @@ namespace Agenda_Virtuel
         public override string ToString()
         {
             return name;
+        }
+
+        /// <summary>
+        /// Get default subjects list
+        /// </summary>
+        /// <returns>List of defaults subjects</returns>
+        public static List<Subject> GetDefaultSubjectsList()
+        {
+            List<Subject> subjects = new List<Subject>()
+            {
+                new Subject("Mathématiques", 1, ColorManager.FromHexa("#555558")),
+                new Subject("Français", 1, ColorManager.FromHexa("#00CCFF")),
+                new Subject("Anglais", 1, ColorManager.FromHexa("#C36D96")),
+                new Subject("Espagnol", 1, ColorManager.FromHexa("#4692AD")),
+                new Subject("Histoire-Geo", 1, ColorManager.FromHexa("#89006A")),
+                new Subject("Art-Plastique", 1, ColorManager.FromHexa("#64547B")),
+                new Subject("Technologie", 1, ColorManager.FromHexa("#7A4900")),
+                new Subject("Physiques-Chimie", 1, ColorManager.FromHexa("#9131AF")),
+                new Subject("S.V.T", 1, ColorManager.FromHexa("#7FA670")),
+            };
+
+            return subjects;
         }
 
     }

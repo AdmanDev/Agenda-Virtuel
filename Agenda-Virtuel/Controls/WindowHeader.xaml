@@ -17,8 +17,7 @@
             <Image/>
             <TextBlock x:Name="LB_Title" Text="Agenda-Virtuel" FontSize="16" Margin="5, 0" VerticalAlignment="Center"/>
         </StackPanel>
-        <Button x:Name="BT_ADMANSoftware" Content="ADMAN Software-FR" Padding="8" HorizontalAlignment="Center" Foreground="White" BorderBrush="White" FontSize="15" FontWeight="Bold" Click="BT_ADMANSoftware_Click">
-            <Button.Background>
+        <Button x:Name="BT_ADMANSoftware" Content="Admandev" Padding="8" HorizontalAlignment="Center" Foreground="White" BorderBrush="White" FontSize="15" FontWeight="Bold" Click="BT_ADMANSoftware_Click">            <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF610000" Offset="1"/>
                     <GradientStop Color="#FFA80000"/>

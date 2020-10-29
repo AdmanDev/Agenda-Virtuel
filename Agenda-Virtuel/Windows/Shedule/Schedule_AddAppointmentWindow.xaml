@@ -19,7 +19,7 @@
             </Border>
 
             <GroupBox Header="Matière :">
-                <ComboBox x:Name="CBB_Subjects" HorizontalContentAlignment="Center" IsEditable="True"/>
+                <ComboBox x:Name="CBB_Subjects" HorizontalContentAlignment="Center" />
             </GroupBox>
 
             <GroupBox Header="Jour :">

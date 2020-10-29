@@ -110,7 +110,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Scripts\XmlSaveRead.cs" />
     <Compile Include="Windows\AndroidAppWindow.xaml.cs">
       <DependentUpon>AndroidAppWindow.xaml</DependentUpon>
     </Compile>
@@ -150,7 +149,6 @@
     </Compile>
     <Compile Include="Scripts\Enums\HomeworkSortingMode.cs" />
     <Compile Include="Scripts\Others classes\Appointment.cs" />
-    <Compile Include="Scripts\Others classes\Subjects.cs" />
     <Compile Include="Scripts\Plugin\Attributes\Menus\Homeworks\HomeworksMenuAttribute.cs" />
     <Compile Include="Scripts\Plugin\Attributes\Menus\Homeworks\HomeworksMenuItemAttribute.cs" />
     <Compile Include="Scripts\Plugin\Attributes\Menus\Main\PluginMenuAttribute.cs" />
@@ -179,6 +177,12 @@
     </Compile>
     <Compile Include="Windows\Plugin\Store\UploadPluginWindow.xaml.cs">
       <DependentUpon>UploadPluginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\AddSubjectWindow.xaml.cs">
+      <DependentUpon>AddSubjectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\SubjectView.xaml.cs">
+      <DependentUpon>SubjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Shedule\ColorEditor.xaml.cs">
       <DependentUpon>ColorEditor.xaml</DependentUpon>
@@ -209,7 +213,7 @@
     <Compile Include="Scripts\SchoolGrades\Grade.cs" />
     <Compile Include="Scripts\SchoolGrades\History.cs" />
     <Compile Include="Scripts\SchoolGrades\SchoolGrades.cs" />
-    <Compile Include="Scripts\SchoolGrades\Subject.cs" />
+    <Compile Include="Scripts\Settings\Subject.cs" />
     <Compile Include="Scripts\Settings\ColorsSettings.cs" />
     <Compile Include="Scripts\Settings\FontsSettings.cs" />
     <Compile Include="Scripts\Settings\Settings.cs" />
@@ -284,6 +288,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\Settings\AddSubjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\SubjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\Shedule\ColorEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -304,7 +316,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\SettingsWindow.xaml">
+    <Page Include="Windows\Settings\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,7 +336,7 @@
     <Compile Include="Windows\SchoolGradesWindow.xaml.cs">
       <DependentUpon>SchoolGradesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SettingsWindow.xaml.cs">
+    <Compile Include="Windows\Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
@@ -429,6 +441,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\deleteIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

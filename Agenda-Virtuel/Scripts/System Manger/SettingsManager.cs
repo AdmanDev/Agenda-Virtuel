@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Agenda_Virtuel.Manager
@@ -39,7 +41,6 @@ namespace Agenda_Virtuel.Manager
             if (save)
             {
                 Save.SaveData();
-
             }
         }
 
@@ -183,19 +184,53 @@ namespace Agenda_Virtuel.Manager
         #region Subjects and shortcut words
 
         /// <summary>
-        /// Set the user subjects list.
+        /// Add a school subject.
         /// </summary>
-        /// <param name="subjects">The new subjects list.</param>
+        /// <param name="subject">The <c>Subject</c> to add.</param>
         /// <param name="save">If true, this change will be saved.</param>
-        public static void SetSubjectList(string[] subjects, bool save = true)
+        public static void AddSubject(Subject subject, bool save = true)
         {
-            Global.userData.settings.SubjectsStrings = subjects;
-            EventsManager.Call_SubjectsListChanged(subjects);
+            Global.userData.settings.Subjects.Add(subject);
+            EventsManager.Call_SubjectAdded(subject);
+            EventsManager.Call_SubjectsListChanged(Global.userData.settings.Subjects);
 
             if (save)
             {
                 Save.SaveData();
 
+            }
+        }
+
+        /// <summary>
+        /// Remove a subject.
+        /// </summary>
+        /// <param name="subject">The <c>Subject</c> to remove.</param>
+        /// <param name="save">If true, this change will be saved.</param>
+        public static void DeleteSubject(Subject subject, bool save = true)
+        {
+            Global.userData.settings.Subjects.Remove(subject);
+            EventsManager.Call_SubjectDeleted(subject);
+            EventsManager.Call_SubjectsListChanged(Global.userData.settings.Subjects);
+
+            if (save)
+            {
+                Save.SaveData();
+            }
+        }
+
+        /// <summary>
+        /// Set new list of subjects.
+        /// </summary>
+        /// <param name="newSubjectsList">New subjects list of user.</param>
+        /// <param name="save">If true, this change will be saved.</param>
+        public static void SetSubjectList(List<Subject> newSubjectsList, bool save = true)
+        {
+            Global.userData.settings.Subjects = newSubjectsList;
+            EventsManager.Call_SubjectsListChanged(newSubjectsList);
+
+            if (save)
+            {
+                Save.SaveData();
             }
         }
 

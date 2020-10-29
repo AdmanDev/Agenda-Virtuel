@@ -16,7 +16,7 @@ namespace Agenda_Virtuel.Windows.Shedule
         {
             this.SP_Colors.Children.Clear();
 
-            foreach (string s in Global.userData.settings.SubjectsStrings)
+            foreach (Subject s in Global.userData.settings.Subjects)
             {
                 this.SP_Colors.Children.Add(new ColorEditor(s));
             }

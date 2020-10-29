@@ -58,7 +58,7 @@
                         <Grid Grid.Column="1" Width="2" HorizontalAlignment="Center" Background="White"/>
 
                         <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                            <ComboBox x:Name="CB_Subject" Text="Saisir la matière" Margin="0,3,0,10" IsEditable="True" SizeChanged="CB_Subject_SizeChanged" />
+                            <ComboBox x:Name="CB_Subject" Text="Saisir la matière" Margin="0,3,0,10" SizeChanged="CB_Subject_SizeChanged" />
                             <CheckBox x:Name="CB_IsTest" Content="C'est un contrôle" Foreground="White" Margin="0,1,0,10" Checked="CB_IsTest_Checked"/>
                             <Button x:Name="BT_Save" Content="Enregistrer" Margin="0,20,0,0" Style="{DynamicResource PrimaryButtonStyle}" Click="BT_Save_Click"/>
                         </StackPanel>

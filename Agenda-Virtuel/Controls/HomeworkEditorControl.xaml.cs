@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -123,13 +124,13 @@ namespace Agenda_Virtuel
             this.CB_Subject.Items.Clear();
             this.Settings = Global.userData.settings;
 
-            foreach (string s in Settings.SubjectsStrings)
+            foreach (Subject s in Settings.Subjects)
             {
-                this.CB_Subject.Items.Add(s);
+                this.CB_Subject.Items.Add(s.Name);
             }
         }
 
-        private void OnSubjectsListChanged(string[] subjects)
+        private void OnSubjectsListChanged(List<Subject> subjects)
         {
             LoadSubjectsList();
         }

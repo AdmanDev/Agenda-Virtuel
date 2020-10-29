@@ -12,13 +12,16 @@ namespace Agenda_Virtuel
         /// <summary>
         /// Get defaults settings.
         /// </summary>
-        [NonSerialized] public readonly static Settings defaultSettings = new Settings();
+        [NonSerialized] public readonly static Settings defaultSettings = new Settings() 
+        { 
+            Subjects = Subject.GetDefaultSubjectsList() 
+        };
 
         //Variables
         /// <summary>
         /// Subjects list
         /// </summary>
-        private Subjects subjects;
+        private List<Subject> subjects;
         private string[] shortcutWords;
         /// <summary>
         /// Colors settings
@@ -40,13 +43,9 @@ namespace Agenda_Virtuel
 
         //Properties
         /// <summary>
-        /// Get or set subjects list in the string array.
-        /// </summary>
-        public string[] SubjectsStrings { get=>subjects.TheSubjects; set => subjects.SetSubjects(value); }
-        /// <summary>
         /// Get or set subjects list.
         /// </summary>
-        public Subjects Subjects { get => subjects; internal set => subjects = value; }
+        public List<Subject> Subjects { get => subjects; internal set => subjects = value; }
         /// <summary>
         /// Get or set shortcuts words.
         /// </summary>
@@ -67,7 +66,7 @@ namespace Agenda_Virtuel
         /// </summary>
         public Settings()
         {
-            subjects = new Subjects();
+            subjects = Subject.GetDefaultSubjectsList();
             shortcutWords = GetDefaultShortcutWords();
             colors = ColorsSettings.GetDefaultColors();
             styles = new Styles();
